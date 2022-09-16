@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+            font-family: '微軟正黑體', monospace;
+        }
+
+        /* main {
+            width: 100%;
+            height: 100%;
+        } */
+
+        .nav {
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .weather_list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .wx_card {
+            border-radius: 15px;
+            width: 250px;
+            height: 350px;
+            margin: 20px;
+            background-color: GhostWhite;
+            box-shadow: rgba(217, 213, 216, 1) 0px 1px 2px 0px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wx_card img {
+            width: 160px;
+            height: 160px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: #120210;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        footer {
+            color: #E56399;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.5;
+        }
+
+        .btn {
+            appearance: none;
+            backface-visibility: hidden;
+            background-color: #E56399;
+            border-radius: 15px;
+            border-style: none;
+            box-shadow: rgba(248, 98, 223, .15) 0 4px 9px;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: normal;
+            line-height: 1.5;
+            outline: none;
+            overflow: hidden;
+            padding: 13px 20px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            transform: translate3d(0, 0, 0);
+            transition: all .3s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: top;
+            white-space: nowrap;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            background-color: #5C5257;
+            opacity: 1;
+            transform: translateY(0);
+            transition-duration: .35s;
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+            transition-duration: .35s;
+        }
+
+        .btn:hover {
+            box-shadow: rgba(54, 48, 51, .2) 0 6px 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="btn" onclick="filter('all')">全台</div>
+        <div class="btn" onclick="filter(north)">北部</div>
+        <div class="btn" onclick="filter(center)">中部</div>
+        <div class="btn" onclick="filter(south)">南部</div>
+        <div class="btn" onclick="filter(east)">東部</div>
+        <div class="btn" onclick="filter(island)">離島</div>
+    </div>
+    <main>
+        <div class="weather_list">
+            <!-- <div class="wx_card img"><img src="./img/icon1.png" alt="SUNNY">
+                <h1>Taipei City</h1>
+                <h2>SUNNY</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon2.png" alt="CLOUDY">
+                <h1>New Taipei City</h1>
+                <h2>CLOUDY</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon3.png" alt="TORNADO">
+                <h1>Taichung City</h1>
+                <h2>TORNADO</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon4.png" alt="STRONG WIND">
+                <h1>Tainan City</h1>
+                <h2>STRONG WIND</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon5.png" alt="SNOW">
+                <h1>Kaohsiung City</h1>
+                <h2>SNOW</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon6.png" alt="FOGGY">
+                <h1>Taoyuan City</h1>
+                <h2>FOGGY</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon7.png" alt="RAINBOW">
+                <h1>Chiayi City</h1>
+                <h2>RAINBOW</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon8.png" alt="STORM">
+                <h1>Hsinchu City</h1>
+                <h2>STORM</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon9.png" alt="RAIN">
+                <h1>Keelung City</h1>
+                <h2>RAIN</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon10.png" alt="PARTLY CLOUDY">
+                <h1>Yilan County</h1>
+                <h2>PARTLY CLOUDY</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon1.png" alt="SUNNY">
+                <h1>Hsinchu County</h1>
+                <h2>SUNNY</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon2.png" alt="CLOUDY">
+                <h1>Miaoli County</h1>
+                <h2>CLOUDY</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon3.png" alt="TORNADO">
+                <h1>Changhua County</h1>
+                <h2>TORNADO</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon4.png" alt="STRONG WIND">
+                <h1>Nantou County</h1>
+                <h2>STRONG WIND</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon5.png" alt="SNOW">
+                <h1>Yunlin County</h1>
+                <h2>SNOW</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon6.png" alt="FOGGY">
+                <h1>Chiayi County</h1>
+                <h2>FOGGY</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon7.png" alt="RAINBOW">
+                <h1>Pingtung County</h1>
+                <h2>RAINBOW</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon8.png" alt="STORM">
+                <h1>Hualien County</h1>
+                <h2>STORM</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon9.png" alt="RAIN">
+                <h1>Taitung County</h1>
+                <h2>RAIN</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div>
+            <div class="wx_card img"><img src="./img/icon10.png" alt="PARTLY CLOUDY">
+                <h1>Penghu County</h1>
+                <h2>PARTLY CLOUDY</h2>
+                <h2>28°C</h2>
+                <p>PoP:16% ; CI:7.1</p>
+            </div> -->
+
+        </div>
+    </main>
+
+    <footer>This webside is for education only</footer>
+
+    <script>
+        const weather_list = document.querySelector('.weather_list')
+        const btn = document.querySelector('.btn')
+
+        const north = ['臺北市', '新北市', '基隆市', '新竹市', '桃園市', '新竹縣', '宜蘭縣']
+        const center = ['苗栗縣', '臺中市', '彰化縣', '南投縣', '雲林縣']
+        const south = ['嘉義市', '嘉義縣', '臺南市', '高雄市', '屏東縣', '澎湖縣']
+        const east = ['花蓮縣', '臺東縣']
+        const island = ['金門縣', '連江縣']
+
+
+
+        fetch('https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-AA300EC1-31BA-465E-B669-6CA2C320A195')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (weather) {
+
+                var locations = weather.records.location
+                result = locations
+                locations.forEach(element => {
+                    let location = element.locationName
+                    let minTemp = element.weatherElement[2].time[0].parameter.parameterName
+                    let maxTemp = element.weatherElement[4].time[0].parameter.parameterName
+                    let PoP = element.weatherElement[1].time[0].parameter.parameterName
+                    let CI = element.weatherElement[3].time[0].parameter.parameterName
+                    let wx = element.weatherElement[0].time[0].parameter.parameterName
+
+                    let imgPath
+
+                    if (PoP < 15) {
+                        imgPath = './img/SUNNY.png'
+                    } else if (PoP < 18) {
+                        imgPath = './img/PARTLY CLOUDY.png'
+                    } else if (PoP <= 25) {
+                        imgPath = './img/RAINBOW.png'
+                    } else if (PoP <= 35) {
+                        imgPath = './img/CLOUDY.png'
+                    } else if (PoP <= 40) {
+                        imgPath = './img/STRONG WIND.png'
+                    } else if (PoP <= 50) {
+                        imgPath = './img/FOGGY.png'
+                    } else if (PoP <= 60) {
+                        imgPath = './img/RAIN.png'
+                    } else {
+                        imgPath = './img/STORM.png'
+                    }
+
+
+                    weather_list.innerHTML = weather_list.innerHTML +
+                        `<div class="wx_card img" data-city="${location}">
+                            <img src=${imgPath} alt="SUNNY">
+                            <h1>${location}</h1>
+                            <h2>${wx}</h2>
+                            <h2>${minTemp} ~ ${maxTemp}°C</h2>
+                            <p>降雨機率:${PoP}% ; 舒適度:${CI}</p>
+                        </div>`
+
+                });
+            });
+            //HTML data-*
+
+        // 第一個方法：把所有的縣市印出來，然後把不想看到的display:none =>
+
+        function filter(areas) {
+            var allcity = document.querySelectorAll('.wx_card')
+            
+            // 將所有程式一筆一筆叫出來
+            allcity.forEach(city => {
+                // 如果條件是all全部，就直接給b1ock
+                if (areas == 'all') {
+                    city.style.display = 'flex'
+                } else {
+                    // 先假設所有程式都不顯示
+                    city.style.display = 'none'
+                    areas.forEach(area => {
+                        // 將條件拿出來比較，如果條件中的任何一個縣市有符合就加上block/flex顯示出來
+                        if (city.dataset.city == area) {
+                            city.style.display = 'flex'
+                        }
+                    })
+                }
+            });
+
+        }
+
+
+            // 第二個方法：根據按下的按鈕選定條件，只將符合條件的縣市做出卡片
+
+            
+
+
+    </script>
+
+</body>
+
+</html>
